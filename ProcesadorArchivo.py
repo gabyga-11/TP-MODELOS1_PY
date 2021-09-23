@@ -48,7 +48,7 @@ class ProcesadorArchivo:
         for i in range (0,self.cantPrendas):
             linea = self.archivo.leerLinea()
             self.vectorLavados.append( [ int(linea[1]) , int(linea[2]) ] ) #prenda, tiempoLavado
-        self.vectorLavados = sorted(self.vectorLavados, key=lambda x:x[1], reverse=True)
+        self.vectorLavados = sorted(self.vectorLavados, key=lambda x:x[1])
 
     def procesar(self):
         linea = self.archivo.leerLinea()
