@@ -7,7 +7,6 @@ def main():
     procesadorArchivo = proc.ProcesadorArchivo(fhRead)
     procesadorArchivo.procesarArchivoEntrada()
     cantPrendas,cantIncompatib,matrizIncompatib,vectorLavados = procesadorArchivo.getResultados()
-    print(matrizIncompatib)
     print(vectorLavados)
     datos = dat.Datos(cantPrendas,cantIncompatib,matrizIncompatib,vectorLavados)
     datos.asignarPrendasEnLavados()

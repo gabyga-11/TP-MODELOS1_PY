@@ -1,5 +1,3 @@
-
-
 class ProcesadorArchivo:
 
     def __init__(self,fhRead):
@@ -23,7 +21,7 @@ class ProcesadorArchivo:
         self.matrizIncompatib = self.crearMatrizCuadrada()
         for i in range(0,self.cantIncompatib):
             linea = self.archivo.leerLinea()
-            print("matrizIncompatib[",int(linea[1])-1,"][",int(linea[2])-1,"] = True")
+            print("matrizIncompatib[",int(linea[1]),"][",int(linea[2]),"] = True")
             self.matrizIncompatib[int(linea[1])-1][int(linea[2])-1] = True
 
     def procesarTiempoLavados(self):

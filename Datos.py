@@ -9,12 +9,16 @@ class Datos:
 
     def esCompatible(self,lavado,prendaNueva): #matrizLavados[i][1] -- ACA SE REVISA UN UNICO LAVADO
         compatible = True
-        prendaEnElLavado = 1
+        posPrendaEnElLavado = 0
 
-        while compatible and prendaEnElLavado < len(lavado)-1:
-            if not self.matrizIncompatib[prendaNueva-1][prendaEnElLavado-1]:
+        if prendaNueva==2:
+            print("")
+
+        while compatible and posPrendaEnElLavado < len(lavado):
+            if self.matrizIncompatib[prendaNueva-1][lavado[posPrendaEnElLavado]-1]:
                 compatible = False
-            prendaEnElLavado += 1
+                print(lavado[posPrendaEnElLavado], "no es compatible con la prenda",prendaNueva)
+            posPrendaEnElLavado += 1
 
         return compatible
 
@@ -33,6 +37,7 @@ class Datos:
             seLeAsignoUnLavado = False
             nroDeLavado = 0
             while not seLeAsignoUnLavado and nroDeLavado < self.cantLavados:
+                print("Es compatible",prendaNueva,"con",self.lavados[nroDeLavado][1],"?",self.esCompatible(self.lavados[nroDeLavado][1],prendaNueva))
                 if self.esCompatible(self.lavados[nroDeLavado][1],prendaNueva):
                     seLeAsignoUnLavado = True
                     self.lavados[nroDeLavado][1].append(prendaNueva)
@@ -42,9 +47,16 @@ class Datos:
             if not seLeAsignoUnLavado:
                 self.agregarPrimerPrendaDeLavado(prendaNueva,tiempoPrendaNueva)
 
+        print("---------------------------")
+        print(self.lavados)
         del(self.vectorLavadosYTiempos[-1])
+        print(self.vectorLavadosYTiempos)
+        print("---------------------------")
+
+
         #TODO: Seria necesario ordenar lavados en funcione de su tiempo cada vez que se agrega algo?
 
     def asignarPrendasEnLavados(self):
         for i in range(self.cantPrendas-1,-1,-1):
             self.agregarPrenda(self.vectorLavadosYTiempos[i][0],self.vectorLavadosYTiempos[i][1])
+
