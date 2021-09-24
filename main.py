@@ -1,8 +1,15 @@
-import ProcesadorArchivo
+import ProcesadorArchivo as proc
+import Filehandler as fh
+import Datos as dat
 
 def main():
-    datos = ProcesadorArchivo.ProcesadorArchivo("entrada.txt", "r")
-    datos.procesar()
+    fhRead = fh.Filehandler("entrada.txt", "r")
+    procesadorArchivo = proc.ProcesadorArchivo(fhRead)
+    procesadorArchivo.procesarArchivoEntrada()
+    cantPrendas,cantIncompatib,matrizIncompatib,vectorLavados = procesadorArchivo.getResultados()
+    print(matrizIncompatib)
+    print(vectorLavados)
+    datos = dat.Datos(cantPrendas,cantIncompatib,matrizIncompatib,vectorLavados)
 
 #LO QUE SIGUE AHORA ES
 # UNA FUNCION QUE SE ENCARGUE DE EMPAREJAR LAS PRENDAS CON MAYOR TIEMPO (Si es que son compatibles)
