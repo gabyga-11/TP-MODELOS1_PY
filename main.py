@@ -10,6 +10,8 @@ def main():
     print(matrizIncompatib)
     print(vectorLavados)
     datos = dat.Datos(cantPrendas,cantIncompatib,matrizIncompatib,vectorLavados)
+    datos.asignarPrendasEnLavados()
+    print(datos.lavados)
 
 #LO QUE SIGUE AHORA ES
 # UNA FUNCION QUE SE ENCARGUE DE EMPAREJAR LAS PRENDAS CON MAYOR TIEMPO (Si es que son compatibles)
