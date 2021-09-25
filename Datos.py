@@ -4,7 +4,7 @@ class Datos:
         self.cantIncompatib = cantIncompatib
         self.matrizIncompatib = matrizIncompatib
         self.vectorLavadosYTiempos = vectorLavados
-        self.lavados = [] #FORMATO: [ [nro lavado,tiempo,[prenda,prenda2]] , [nro lavado,tiempo2,[prenda3,prenda4]] , ...]
+        self.lavados = [] #FORMATO: [ [tiempo,[prenda,prenda2]] , [tiempo2,[prenda3,prenda4]] , ...]
         self.cantLavados = 0
 
     def esCompatible(self,lavado,prendaNueva): #matrizLavados[i][1] -- ACA SE REVISA UN UNICO LAVADO
@@ -55,15 +55,18 @@ class Datos:
 
 
     def asignarPrendasEnLavados(self):
-        for i in range(self.cantPrendas-1,-1,-1):
+        for i in range(self.cantPrendas-1, -1, -1):
             self.agregarPrenda(self.vectorLavadosYTiempos[i][0],self.vectorLavadosYTiempos[i][1])
 
-    def obtenerTiempoTotalLavado(self,cantLavarropas):
+    def obtenerTiempoTotalLavado(self, cantLavarropas):
         tiempos=[]
         for i in range(cantLavarropas):
-            tiempoAcum = 0
-            for nroPrenda in range(i,self.cantLavados,i+1): #TODO: Aca ver que no quede out of range
-                tiempoAcum += self.lavados[nroPrenda][0]
+            tiempoUnLavarropas = 0
+            for nroPrenda in range(i, self.cantLavados, i+1): #TODO: Aca ver que no quede out of range
+                tiempoUnLavarropas += self.lavados[nroPrenda][0]
+            tiempos.append(tiempoUnLavarropas)
 
+        return(max(tiempos))
 
-            tiempos.append()
+    def devolverResultados(self):
+        return self.lavados, self.cantLavados

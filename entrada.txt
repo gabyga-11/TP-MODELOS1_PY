@@ -1,3 +1,13 @@
+c Primer Problema
+c El force push sobre el repo github implica la desaprobacion de todo el TP
+c
+c En esta primera entrega se pide que busquen la mejor solucion posible y la suban a modelosuno.okapii.com
+c En el repo github creen un archivo "entrega_1.txt", debe contener
+c	impresion inicial del problema
+c	ideas de como lo van a intentar resolver
+c	comentarios sobre los cambios que hagan en el codigo a medida que intentan mejorar el resultado
+c	comentarios finales
+c	una hoja maximo
 p edge 20 210
 e 1 10
 e 1 19

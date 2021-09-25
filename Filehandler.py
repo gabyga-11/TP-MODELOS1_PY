@@ -9,11 +9,13 @@ class Filehandler:
             linea = linea.rstrip("\n").split(" ")
         return linea
 
-    def escribirLinea(self,vector):
-        for i in range(len(vector)):
-            vector[i] = str(vector[i])
-        vector = " ".join(vector)
-        self._fh.write(vector)
+    def procesarArchivoEntrada(self,linea):
+        while linea[0]=="c":
+            linea = self.leerLinea()
+        return linea
+
+    def escribirLinea(self,nroLavado,prenda):
+        self._fh.write(str(nroLavado)+" "+str(prenda)+"\n")
 
     def cerrarArchivo(self):
         self._fh.close()

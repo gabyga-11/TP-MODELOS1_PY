@@ -1,0 +1,32 @@
+IMPRESION INICIAL DEL PROBLEMA: Mas alla del problema en sí, la comprensión del enunciado fue el proceso mas
+largo y críptico. Dicho esto, entendí que el problema consiste en "emparejar" prendas según su compatibilidad,
+teniendo en cuenta el tiempo de lavado, que será el tiempo de la prenda con mayor tiempo necesario de lavado.
+
+IDEAS SOBRE COMO RESOLVER EL PROBLEMA: (Se realizó previo a ir al código)
+
+- Las incompatibilidades mejor en una matriz cuadrada (simétrica) de booleanos, donde True sería una incompatibilidad
+entre prendas. Ejemplo: matrizIncompatib[0][1] tendría la relación de compatibilidad entre la prenda 1 y 2.
+No es lo más eficiente que hay, puesto que como es simétrica hay información repetida, pero como también se redunda
+en el archivo del problema, lo dejé así.
+- Las prendas y sus tiempos de lavado (supongo en minutos) se guardan en una lista anidada, donde cada linea[i]
+es un vector de 2 elementos [prenda,tiempo]
+- La idea general es ordenar el vector de las prendas en función del tiempo. Luego, ir agregando en lavados las prendas
+de la que mas tarda a la que menos. Con esto, las prendas de mayor tiempo, en caso de ser compatibles, irian juntas
+Esto se logra con un vector lavados, donde cada elemento es formato [tiempo,[prenda,prenda2]] y el numero de lavado
+es la posición relativa en lavados más uno
+- Del vector lavados, se extrae lo que se pide para el archivo solución
+
+COMENTARIOS:
+- Preferí Python por sobre C++. Empecé a armarlo en C++ y luego me arrepentí al ver la complejidad y extensión del codigo
+- Cree una interfaz interactiva para definir algunos parametros (nombres de archivos por ejemplo) y mostrar resultados
+sin tener que recurrir al archivo.
+- En principio iba a basarme en realizar una lavandería con un solo lavarropas, cosa que el tiempo total de lavado
+sería la sumatoria de los tiempos de cada lavado. Renuncié a esa idea por la ridiculez práctica de la misma: una
+lavandería con un solo lavarropas no puede llamarse lavandería. Por ende, la cantidad de lavarropas es un parametro
+a definir por el usuario. Esto significa que si hay "i" lavarropas, se ejecutaran los i lavados de mayor duración, luego
+los otros i, y así sucesivamente; donde i es un valor entero entre 1 y la cantidad total de lavados. Además el tiempo
+total será cuando todos los lavarropas hayan terminado sus respectivos lavados.
+
+COMENTARIOS FINALES:
+Para 1 lavarropa, el tiempo de lavado total sería de 63 (minutos)
+
