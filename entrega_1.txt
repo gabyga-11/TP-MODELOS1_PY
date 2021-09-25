@@ -4,17 +4,18 @@ teniendo en cuenta el tiempo de lavado, que será el tiempo de la prenda con may
 
 IDEAS SOBRE COMO RESOLVER EL PROBLEMA: (Se realizó previo a ir al código)
 
-- Las incompatibilidades mejor en una matriz cuadrada (simétrica) de booleanos, donde True sería una incompatibilidad
+- Las incompatibilidades; mejor en una matriz cuadrada (simétrica) de booleanos, donde True sería una incompatibilidad
 entre prendas. Ejemplo: matrizIncompatib[0][1] tendría la relación de compatibilidad entre la prenda 1 y 2.
-No es lo más eficiente que hay, puesto que como es simétrica hay información repetida, pero como también se redunda
-en el archivo del problema, lo dejé así.
-- Las prendas y sus tiempos de lavado (supongo en minutos) se guardan en una lista anidada, donde cada linea[i]
+Como es simétrica hay información repetida, pero como también se redunda en el archivo del problema, lo dejé así.
+- Las prendas y sus tiempos de lavado (supongo en minutos) se guardan en una lista anidada, donde cada elemento de ella
 es un vector de 2 elementos [prenda,tiempo]
 - La idea general es ordenar el vector de las prendas en función del tiempo. Luego, ir agregando en lavados las prendas
-de la que mas tarda a la que menos. Con esto, las prendas de mayor tiempo, en caso de ser compatibles, irian juntas
-Esto se logra con un vector lavados, donde cada elemento es formato [tiempo,[prenda,prenda2]] y el numero de lavado
-es la posición relativa en lavados más uno
+de la que mas tarda a la que menos. Con esto, las prendas de mayor tiempo, en caso de ser compatibles, irian juntas.
+Si una prenda no encuentra un lavado donde sea compatible con todas las prendas del mismo, se crea un nuevo lavado.
+- Lo anterior se logra con un vector lavados, donde cada elemento es formato [tiempo,[prenda_1,...,prenda_n]] y el
+numero de lavado es la posición relativa en el vector lavados más uno
 - Del vector lavados, se extrae lo que se pide para el archivo solución
+- No hay limite de cantidad de ropa por lavado.
 
 COMENTARIOS:
 - Preferí Python por sobre C++. Empecé a armarlo en C++ y luego me arrepentí al ver la complejidad y extensión del codigo
@@ -23,10 +24,15 @@ sin tener que recurrir al archivo.
 - En principio iba a basarme en realizar una lavandería con un solo lavarropas, cosa que el tiempo total de lavado
 sería la sumatoria de los tiempos de cada lavado. Renuncié a esa idea por la ridiculez práctica de la misma: una
 lavandería con un solo lavarropas no puede llamarse lavandería. Por ende, la cantidad de lavarropas es un parametro
-a definir por el usuario. Esto significa que si hay "i" lavarropas, se ejecutaran los i lavados de mayor duración, luego
+a definir por el usuario. Esto significa que si hay "i" lavarropas, se ejecutarán los i lavados de mayor duración, luego
 los otros i, y así sucesivamente; donde i es un valor entero entre 1 y la cantidad total de lavados. Además el tiempo
 total será cuando todos los lavarropas hayan terminado sus respectivos lavados.
+- RESULTADO A PRIORI: Para 1 lavarropa, el tiempo de lavado total sería de 63 (minutos)
 
 COMENTARIOS FINALES:
-Para 1 lavarropa, el tiempo de lavado total sería de 63 (minutos)
-
+El problema es en esencia una cola de prioridad, donde (en mi caso) tienen mas prioridad las de mayor tiempo de lavado
+Siguiendo esta idea, podría haber parametrizado la cantidad total de compatibilidades de cada prenda. Con ese dato,
+para un mismo tiempo de lavado podría haberle dado prioridad a las prendas con menos prendas compatibles.
+Esto evitaría la necesidad de crear posibles nuevos lavados, ya que las prendas que se agregan al final, al tener
+mas compatibilidad con otras, podrían integrarse a otro lavado.
+Sin embargo, no pude pasar de esta idea al cálculo por falta de tiempo propio :(
