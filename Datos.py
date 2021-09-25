@@ -54,9 +54,16 @@ class Datos:
         print("---------------------------")
 
 
-        #TODO: Seria necesario ordenar lavados en funcione de su tiempo cada vez que se agrega algo?
-
     def asignarPrendasEnLavados(self):
         for i in range(self.cantPrendas-1,-1,-1):
             self.agregarPrenda(self.vectorLavadosYTiempos[i][0],self.vectorLavadosYTiempos[i][1])
 
+    def obtenerTiempoTotalLavado(self,cantLavarropas):
+        tiempos=[]
+        for i in range(cantLavarropas):
+            tiempoAcum = 0
+            for nroPrenda in range(i,self.cantLavados,i+1): #TODO: Aca ver que no quede out of range
+                tiempoAcum += self.lavados[nroPrenda][0]
+
+
+            tiempos.append()
