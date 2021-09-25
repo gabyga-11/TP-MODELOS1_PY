@@ -1,11 +1,11 @@
 
 class Filehandler:
     def __init__(self,nombreArchivo,tipoArchivo):
-        self._fh = open(nombreArchivo,tipoArchivo)
+        self.__fh = open(nombreArchivo, tipoArchivo)
 
     def leerLinea(self):
-        linea = self._fh.readline()
-        if linea:
+        linea = self.__fh.readline()
+        if linea and not linea[0] == "c":
             linea = linea.rstrip("\n").split(" ")
         return linea
 
@@ -15,7 +15,7 @@ class Filehandler:
         return linea
 
     def escribirLinea(self,nroLavado,prenda):
-        self._fh.write(str(nroLavado)+" "+str(prenda)+"\n")
+        self.__fh.write(str(nroLavado) + " " + str(prenda) + "\n")
 
     def cerrarArchivo(self):
-        self._fh.close()
+        self.__fh.close()

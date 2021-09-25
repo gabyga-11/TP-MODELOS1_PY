@@ -6,7 +6,7 @@ import Menu
 def main():
     menu = Menu.Menu()
 
-    fhRead = fh.Filehandler(menu.nombreEntrada, "r")
+    fhRead = fh.Filehandler(menu.obtenerNombreEntrada(), "r")
     archivoCarga = proc.ProcesadorArchivo(fhRead)
 
     archivoCarga.procesarArchivoEntrada()
@@ -20,12 +20,12 @@ def main():
     lavados,cantLavados = datos.devolverResultados()
     menu.mostrarResultadosPorLavado(lavados,cantLavados)
 
-    fhWrite = fh.Filehandler(menu.nombreSalida,"w")
+    fhWrite = fh.Filehandler(menu.obtenerNombreSalida(),"w")
     archivoGuardado = proc.ProcesadorArchivo(fhWrite)
     archivoGuardado.guardarEnArchivo(fhWrite,lavados,cantLavados)
 
-    tiempoTotal = datos.obtenerTiempoTotalLavado(menu.cantLavarropas)
-    menu.mostrarTiempoTotalLavados(tiempoTotal,menu.cantLavarropas)
+    tiempoTotal = datos.obtenerTiempoTotalLavado(menu.obtenerCantLavarropas())
+    menu.mostrarTiempoTotalLavados(tiempoTotal, menu.obtenerCantLavarropas())
 
     fhRead.cerrarArchivo()
     fhWrite.cerrarArchivo()

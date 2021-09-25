@@ -2,11 +2,10 @@ import os,time
 
 class Menu:
     def __init__(self):
-        self.cantPrendas = None
-        self.cantLavarropas = 0
-        self.nombreEntrada = "entrada.txt"
-        self.nombreSalida = "resultado.txt"
-        self.cantLavarropas = 1
+        self.__nombreEntrada = "entrada.txt"
+        self.__nombreSalida = "resultado.txt"
+        self.__cantLavarropas = 1
+        self.limpiar(1)
         self.iniciarMenu()
 
 
@@ -16,8 +15,9 @@ class Menu:
         self.cambiosDelUsuario()
 
     def mensajeBienvenida(self):
-        print("{:^60}".format(" PROGRAMA DE LAVADOS 1.0 "))
-        print("{:^60}".format(" por Gabriel Carniglia \n"))
+        print("{:-^60}".format(" PROGRAMA DE LAVADOS 1.0 "))
+        print("{:-^60}".format(" por Gabriel Carniglia "))
+        print()
 
     def objetivo(self):
         print("El objetivo de este programa es determinar las prendas de cada programa de lavado")
@@ -27,7 +27,8 @@ class Menu:
         print("indicando la composicion de cada lavado")
 
     def cambiosDelUsuario(self):
-        print("PRESIONE [ENTER] PARA CONTINUAR..")
+        input("PRESIONE [ENTER] PARA CONTINUAR..")
+        self.limpiar(1)
         self.cambioNombreArchivoEntrada()
         self.limpiar(1)
         self.cambioNombreArchivoSalida()
@@ -39,36 +40,32 @@ class Menu:
         opcion = input("Desea cambiar el nombre? S/N")
         opcion = self.opcionValidaSN(opcion)
         if opcion in ["S", "s"]:
-            self.nombre = str(input("Ingrese nombre del archivo del problema (no ponga '.txt'): ")+".txt")
+            self.__nombreEntrada = str(input("Ingrese nombre del archivo del problema (no ponga '.txt'): ") + ".txt")
 
     def cambioNombreArchivoSalida(self):
         print("Por defecto, se ha colocado resultado.txt como nombre al archivo de la solución")
         opcion = input("Desea cambiar el nombre? S/N")
         opcion = self.opcionValidaSN(opcion)
         if opcion in ["S", "s"]:
-            self.nombre = str(input("Ingrese nombre del archivo de la solución (no ponga '.txt'): ")+".txt")
+            self.__nombreSalida = str(input("Ingrese nombre del archivo de la solución (no ponga '.txt'): ") + ".txt")
 
     def cambioCantLavarropas(self,cantPrendas):
         print("Por defecto, se ha colocado un solo lavarropas en la lavandería")
         opcion = input("Desea cambiar la cantidad? S/N")
-        opcion = self.opcionNumValida(opcion,1,cantPrendas)
+        opcion = self.opcionValidaSN(opcion)
         if opcion in ["S","s"]:
-            self.cantLavarropas = int(input("Ingrese la cantidad de lavarropas: "))
+            self.__cantLavarropas = self.opcionNumValida(int(input("Ingrese la cantidad de lavarropas: ")), 1, cantPrendas)
         self.limpiar(1)
 
     def mostrarResultadosPorLavado(self,lavados,cantLavados):
-        print("{:^60}".format("-"))
+        print("{:-^60}".format("-"))
         nroLavado = 1
+        print("{:^13} | {:^10} | {:^20} ".format("NRO. LAVADO","DURACION","PRENDAS EN EL LAVADO"))
         for tiempo,prendas in lavados:
-            print("LAVADO NRO {}".format(nroLavado))
-            print("Duración del lavado: ",tiempo,"minutos")
-            print("Prendas del lavado:"," ".join([str(prenda) for prenda in prendas]))
-            print("{:^60}".format("-"))
+            print("{:^13} | {:^10} | {:^20} ".format(nroLavado,tiempo," ".join([str(prenda) for prenda in prendas])))
             nroLavado += 1
-            if nroLavado >= cantLavados:
-                input("--  [ENTER] --> SIGUIENTE LAVADO  --")
-
-        print("CANTIDAD DE LAVADOS: {}".format(cantLavados))
+        print()
+        print("{:-^60}".format("CANTIDAD DE LAVADOS: "+str(cantLavados)))
         input("PRESIONE ENTER PARA CONTINUAR..")
 
 
@@ -93,3 +90,12 @@ class Menu:
     def mostrarTiempoTotalLavados(self,tiempoTotal,cantLavarropas):
         self.limpiar(1)
         print("El tiempo total de lavado es de {} minutos, para un total de {} lavarropa/s".format(tiempoTotal,cantLavarropas))
+
+    def obtenerNombreEntrada(self):
+        return self.__nombreEntrada
+
+    def obtenerNombreSalida(self):
+        return self.__nombreSalida
+
+    def obtenerCantLavarropas(self):
+        return self.__cantLavarropas
